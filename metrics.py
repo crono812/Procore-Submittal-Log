@@ -3,12 +3,12 @@
 
 # In[1]:
 
-def metrics(df, location):
+def metrics(data, location):
     import pandas as pd
     import numpy as np
     import procore_functions as procore
 
-
+    df = data.copy()
     closeout = ['As-Built',
                'Attic Stock',
                'Certificate of Substantial Completion',
@@ -23,8 +23,8 @@ def metrics(df, location):
 
     types = df['Description'].unique()
     not_closeout = [x for x in types if x not in closeout]
-    df['Type'] = df['Description']
-    df['Location'] = df['Phase']
+    df.loc[:, 'Type'] = df['Description']
+    df.loc[:, 'Location'] = df['Phase']
 
     keys = ['open',
            'closeout',
